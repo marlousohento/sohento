@@ -1,0 +1,175 @@
+<html><head><base href="https://filipinonamegen.culturaldb.org/">
+<meta charset="UTF-8">
+<title>Filipino Name Generator | Pangalan</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital@0;1&display=swap');
+    
+    body {
+        font-family: 'Lato', sans-serif;
+        background: linear-gradient(135deg, #f7d794, #f8c291);
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        max-width: 600px;
+        width: 90%;
+        text-align: center;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        color: #2d3436;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .tagline {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #636e72;
+        margin-bottom: 30px;
+    }
+
+    .name-display {
+        font-size: 1.8em;
+        color: #2d3436;
+        margin: 20px 0;
+        min-height: 60px;
+        font-family: 'Playfair Display', serif;
+    }
+
+    button {
+        background: #ff7675;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        background: #e66767;
+        transform: translateY(-2px);
+    }
+
+    .meaning {
+        margin-top: 20px;
+        color: #636e72;
+        font-style: italic;
+    }
+
+    .options {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        justify-content: center;
+    }
+
+    .toggle-btn {
+        background: transparent;
+        border: 2px solid #ff7675;
+        color: #ff7675;
+        padding: 8px 15px;
+        border-radius: 15px;
+    }
+
+    .toggle-btn.active {
+        background: #ff7675;
+        color: white;
+    }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pangalan</h1>
+        <div class="tagline">Discover Your Filipino Name</div>
+        
+        <div class="options">
+            <button class="toggle-btn active" id="femaleBtn">Female</button>
+            <button class="toggle-btn" id="maleBtn">Male</button>
+        </div>
+
+        <div class="name-display" id="nameDisplay">Click generate to start</div>
+        <div class="meaning" id="meaningDisplay"></div>
+        <button id="generateBtn">Generate Name</button>
+    </div>
+
+<script>
+const femaleNames = {
+    'Maria': 'Derived from Mary, very common in Filipino culture',
+    'Rosa': 'Means "rose", a symbol of love and beauty',
+    'Ligaya': 'Means "happiness" in Tagalog',
+    'Mariposa': 'Means "butterfly", symbolizing transformation',
+    'Bituin': 'Means "star" in Tagalog',
+    'Dalisay': 'Means "pure" or "genuine" in Tagalog',
+    'Mayumi': 'Means "gentle" or "refined"',
+    'Hiraya': 'Means "fruit of one\'s hopes, dreams, and aspirations"',
+    'Amihan': 'The north wind in Philippine mythology',
+    'Tala': 'Means "star" in Tagalog'
+};
+
+const maleNames = {
+    'Agapito': 'Derived from Greek "agape" meaning "love"',
+    'Bayani': 'Means "hero" in Tagalog',
+    'Dakila': 'Means "great" or "noble" in Tagalog',
+    'Isagani': 'Means "harvest" or "bounty"',
+    'Kidlat': 'Means "lightning" in Tagalog',
+    'Lakam': 'Means "step" or "stride"',
+    'Makisig': 'Means "handsome" or "gallant"',
+    'Ningning': 'Means "brilliance" or "sparkle"',
+    'Tadhana': 'Means "destiny" in Tagalog',
+    'Ulap': 'Means "cloud" in Tagalog'
+};
+
+let currentGender = 'female';
+
+document.getElementById('femaleBtn').addEventListener('click', () => {
+    currentGender = 'female';
+    document.getElementById('femaleBtn').classList.add('active');
+    document.getElementById('maleBtn').classList.remove('active');
+});
+
+document.getElementById('maleBtn').addEventListener('click', () => {
+    currentGender = 'male';
+    document.getElementById('maleBtn').classList.add('active');
+    document.getElementById('femaleBtn').classList.remove('active');
+});
+
+document.getElementById('generateBtn').addEventListener('click', () => {
+    const names = currentGender === 'female' ? femaleNames : maleNames;
+    const namesList = Object.keys(names);
+    const randomName = namesList[Math.floor(Math.random() * namesList.length)];
+    
+    const nameDisplay = document.getElementById('nameDisplay');
+    const meaningDisplay = document.getElementById('meaningDisplay');
+    
+    // Animate the name change
+    nameDisplay.style.opacity = 0;
+    meaningDisplay.style.opacity = 0;
+    
+    setTimeout(() => {
+        nameDisplay.textContent = randomName;
+        meaningDisplay.textContent = names[randomName];
+        nameDisplay.style.opacity = 1;
+        meaningDisplay.style.opacity = 1;
+    }, 200);
+});
+
+// Add fade transition
+document.getElementById('nameDisplay').style.transition = 'opacity 0.2s ease';
+document.getElementById('meaningDisplay').style.transition = 'opacity 0.2s ease';
+</script>
+</body>
+</html>
